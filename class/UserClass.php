@@ -16,7 +16,7 @@ Class User{
 
     public function adduser($username,$useremail,$userpass){
         // print_r($useremail);exit;
-        $hash = password_hash($userpass, PASSWORD_DEFAULT); 
+        $hash = md5($userpass); 
         $sql = "INSERT INTO `users`(`name`, `email`, `password`,`password_reset`, `type`) VALUES ('$username', '$useremail', '$hash','', 2)";
         // print_r($sql);exit;
         
@@ -44,45 +44,50 @@ Class User{
 		}
 
     public function loginuser($useremail,$userpass){
-        $userpassword = password_hash($userpass, PASSWORD_DEFAULT);
-        // $sql = "SELECT id FROM users WHERE password= '$userpassword ' AND email = '$useremail";
-        $sql = "SELECT * FROM usres";
+        $userpass = md5($userpass);
+        // print_r($userpass);
+        $sql = "SELECT id FROM users WHERE password= '$userpass' and email = '$useremail'";
+        // $sql = "SELECT * FROM usres";
+        // echo "<pre>";
+        // print_r($sql);exit;
+        $result = mysqli_query($this->connection, $sql);
         // echo "<pre>";
         // print_r($result);exit;
-        $result = mysqli_query($this->connection, $sql);
-
-        // $user = mysqli_fetch_array($result);
-        // $count_row = $result->num_rows;
-        // if($count_row == 1){
-        //     $_SESSION['login'] = true;
-        //     $_SESSION['id'] = $user['id'];
-        //     return true;
-        // }
-        // else {
-        //     return false;
-        // }
+        $user = mysqli_fetch_array($result);
+        $count_row = $result->num_rows;
+        // echo "<pre>";
+        // print_r($count_row);exit;
         
-        if(mysqli_num_rows($result) > 0)  
-           {  
-                while($row = mysqli_fetch_array($result))  
-                {  
-                     if(password_verify($userpass, $row["password"]))  
-                     {  
-                          //return true;  
-                          $_SESSION["email"] = $useremail;  
-                          header("location:admin/dashboard.php");  
-                     }  
-                     else  
-                     {  
-                          //return false;  
-                          echo '<script>alert("Wrong User Details")</script>';  
-                     }  
-                }  
-           }  
-           else  
-           {  
-                echo '<script>alert("Wrong User Details")</script>';  
-           }  
+        if($count_row == 1){
+            $_SESSION['login'] = true;
+            $_SESSION['id'] = $user['id'];
+            return true;
+        }
+        else {
+            return false;
+        }
+        
+        // if(mysqli_num_rows($result) > 0)  
+        //    {  
+        //         while($row = mysqli_fetch_array($result))  
+        //         {  
+        //              if(password_verify($userpass, $row["password"]))  
+        //              {  
+        //                   //return true;  
+        //                   $_SESSION["email"] = $useremail;  
+        //                   header("location:admin/dashboard.php");  
+        //              }  
+        //              else  
+        //              {  
+        //                   //return false;  
+        //                   echo '<script>alert("Wrong User Details")</script>';  
+        //              }  
+        //         }  
+        //    }  
+        //    else  
+        //    {  
+        //         echo '<script>alert("Wrong User Details")</script>';  
+        //    }  
     }
     public function get_session(){
         return $_SESSION['login'];

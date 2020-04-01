@@ -1,14 +1,14 @@
 <?php 
-// session_start();
-// include 'class/database.php';
-// include 'class/User.php';
-// $database = new Database();
-// $db = $database->getConnection();
-// $user = new User($db);
-// $uid = $_SESSION['id'];
-// if(!$user->get_session()){
-//   header('location: ../login.php');
-// }  
+session_start();
+include '../class/database.php';
+include '../class/UserClass.php';
+$database = new Database();
+$db = $database->getConnection();
+$user = new User($db);
+$uid = $_SESSION['id'];
+if(!$user->get_session()){
+  header('location: ../login.php');
+}  
 ?>
 <!DOCTYPE html>
 <html>

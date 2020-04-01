@@ -1,16 +1,22 @@
 <?php 
+session_start(); 
 include 'class/database.php';
 include 'class/UserClass.php';
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);
-if(isset($_POST['submit']) ){
-  // die('eeee');
-  $useremail = $user->sanitize($_POST['email']);
-  $userpass = $user->sanitize($_POST['password']);
-  $result = $user->loginuser($useremail,$userpass);
-
-  }
+if (isset($_REQUEST['submit'])) {
+  extract($_REQUEST);
+    $login = $user->loginuser($useremail,$userpass);
+    // print_r($login);exit;
+    if ($login) {
+        // Registration Success
+       header("location:admin/dashboard.php");
+    } else {
+        // Registration Failed
+        echo 'Wrong username or password';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,7 +50,7 @@ if(isset($_POST['submit']) ){
 
       <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email" required>
+          <input type="email" class="form-control" placeholder="Email" name="useremail" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -52,7 +58,7 @@ if(isset($_POST['submit']) ){
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password" required>
+          <input type="password" class="form-control" placeholder="Password" name="userpass" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

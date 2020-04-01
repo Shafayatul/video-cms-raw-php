@@ -148,7 +148,7 @@
           <a href="#" class="btn btn-default btn-flat">Profile</a>
         </div>
         <div class="pull-right">
-          <a href="../login.php" class="btn btn-default btn-flat">Sign out</a>
+          <a href="./signout.php" class="btn btn-default btn-flat">Sign out</a>
         </div>
       </li>
     </ul>
@@ -208,7 +208,7 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>
                  Instructors
                 <i class="right fas fa-angle-left"></i>
@@ -225,6 +225,29 @@
                 <a href="./instructorlist.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Instructor List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+             <i class="nav-icon fas fa-school"></i>
+              <p>
+                 Class
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./class/classadd.php" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New  Class</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./class/class.php" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Class List</p>
                 </a>
               </li>
             </ul>
