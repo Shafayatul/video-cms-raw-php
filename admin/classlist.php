@@ -1,15 +1,9 @@
 <?php 
-include('./includes/header.php');
-include('../class/InstractorClass.php');
+include('includes/header.php');
+include('../class/ClassesClass.php');
 $db = $database->getConnection();
-$instructor = new InstructorClass($db);
+$instructor = new Classes($db);
 // $instructor->addInstructor();
-
-if(isset($_POST['submit'])){
-    $instructorname = $instructor->sanitize($_POST['instructorname']);
-    $instructorgender = $instructor->sanitize($_POST['gender']);
-    $result = $instructor->addInstructor($instructorname,$instructorgender);
-}
 ?>
     <!-- Content Header (Page header) -->
     <div class="content-header">

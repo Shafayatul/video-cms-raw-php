@@ -27,9 +27,26 @@ class InstructorClass{
             return false;
         }
     }
-    public function getInstructor(){
+    public function viewInstructor(){
         $sql = "SELECT * FROM instructor";
         $result = mysqli_query($this->connection,$sql);
+        return $result;
+    }
+    public function getInstructor($instructor_id){
+        $sql = "SELECT * FROM $this->table_name WHERE id = $instructor_id";
+        $result = mysqli_query($this->connection,$sql);
+        return $result;
+    }
+
+    public function updateInstructor($instructor_id){
+        $sql = "UPDATE $this->table_name SET  WHERE id = $instructor_id";
+        $result = mysqli_query($this->connection,$sql);
+        return $result;
+    }
+
+    public function deleteInstructor($id){
+        $sql = "DELETE FROM $this->table_name WHERE id= $id";
+        $result = mysqli_query($this->connection, $sql);
         return $result;
     }
 }

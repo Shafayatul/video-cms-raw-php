@@ -17,7 +17,7 @@ Class User{
     public function adduser($username,$useremail,$userpass){
         // print_r($useremail);exit;
         $hash = md5($userpass); 
-        $sql = "INSERT INTO `users`(`name`, `email`, `password`,`password_reset`, `type`) VALUES ('$username', '$useremail', '$hash','', 2)";
+        $sql = "INSERT INTO `users`(`name`, `email`, `password`,`password_reset`, `type`, `created_at`, `updated_at`) VALUES ('$username', '$useremail', '$hash','', 2,'','')";
         // print_r($sql);exit;
         
         $result = mysqli_query($this->connection,$sql);

@@ -239,15 +239,38 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./class/classadd.php" class="nav-link active">
+                <a href="./classadd.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New  Class</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./class/class.php" class="nav-link active">
+                <a href="./classlist.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Class List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+             <i class="nav-icon fas fa-list-alt"></i>
+              <p>
+                 Category
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./categoryadd.php" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./category.php" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Category List</p>
                 </a>
               </li>
             </ul>

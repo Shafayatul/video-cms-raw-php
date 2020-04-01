@@ -1,9 +1,9 @@
 <?php 
-include('includes/header.php');
+include('./includes/header.php');
 include('../class/InstractorClass.php');
 $db = $database->getConnection();
 $instructor = new InstructorClass($db);
-$result = $instructor->getInstructor();
+$result = $instructor->viewInstructor();
 ?>
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -38,7 +38,7 @@ $result = $instructor->getInstructor();
                 <tr>
                   <th>Name</th>
                   <th>Gender</th>
-                  <th>Entry</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,10 @@ $result = $instructor->getInstructor();
                 <tr>
                   <td><?php echo $row['instructor_name'] ?></td>
                   <td><?php echo $row['gender'] ?> </td>
-                  <td><?php echo $row['created_at'] ?> </td>
+                  <td>
+                    <a href="instructoredit.php?id= <?php echo $row['id']; ?>"><i class="fas fa-edit text-warning"></i></a>
+                    <a href="instructordelete.php?id= <?php echo $row['id']; ?>"><i class="fas fa-trash-alt text-danger"></i></a>
+                  </td>
                 </tr>
                   <?php } ?>
                 </tbody>
@@ -54,7 +57,7 @@ $result = $instructor->getInstructor();
                 <tr>
                   <th>Name</th>
                   <th>Gender</th>
-                  <th>Entry</th>
+                  <th>Action</th>
                 </tr>
                 </tfoot>
               </table>

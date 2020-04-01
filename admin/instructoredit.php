@@ -3,7 +3,9 @@ include('./includes/header.php');
 include('../class/InstractorClass.php');
 $db = $database->getConnection();
 $instructor = new InstructorClass($db);
-// $instructor->addInstructor();
+$instructor_id = $_GET['id'];
+$getresult = $instructor->getInstructor($instructor_id);
+$result = mysqli_fetch_assoc($getresult);
 
 if(isset($_POST['submit'])){
     $instructorname = $instructor->sanitize($_POST['instructorname']);
@@ -48,7 +50,7 @@ if(isset($_POST['submit'])){
                         <!-- input states -->
                         <div class="form-group">
                             <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Name</label>
-                            <input type="text" class="form-control" id="instructorname" name="instructorname" placeholder="Enter Instructor Name">
+                            <input type="text" class="form-control" id="instructorname" name="instructorname" value="<?php $result['instructor_name']; ?>" placeholder="Enter Instructor Name">
                         </div>
                     </div>
                 </div>
