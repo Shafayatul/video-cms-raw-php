@@ -12,9 +12,13 @@ $getCategory = $category->viewCategory();
 $getInstructor = $instructor->viewInstructor();
 
 if(isset($_POST['submit'])){
-    $instructorname = $classes->sanitize($_POST['instructorname']);
-    $instructorgender = $classes->sanitize($_POST['gender']);
-    $result = $classes->addClasses($instructorname,$instructorgender);
+    $class_name = $classes->sanitize($_POST['class_name']);
+    $category_name = $classes->sanitize($_POST['category_name']);
+    $instructor_name = $classes->sanitize($_POST['instructor_name']);
+    $class_date_time = $classes->sanitize($_POST['class_date_time']);
+    $classdescription = addslashes($_POST['classdescription']);
+    // $class_img = $classes->sanitize($_POST['class_img']);
+    $result = $classes->addClasses($class_name,$category_name,$instructor_name,$class_date_time,$classdescription);
 }
 ?>
     <!-- Content Header (Page header) -->
@@ -60,7 +64,7 @@ if(isset($_POST['submit'])){
                       <div class="col-sm-6">
                         <div class="form-group">
                             <label class="col-form-label" for="category">Select Category</label>
-                            <select name="category" id="category" class="form-control select2">
+                            <select name="category_name" id="category" class="form-control select2">
                               <?php while($row = mysqli_fetch_assoc($getCategory)){ ?>
                               <option value="<?php echo $row['id'] ?>"><?php echo $row['category_name'] ?></option>
                               <?php } ?>
@@ -73,8 +77,8 @@ if(isset($_POST['submit'])){
                     <div class="col-sm-6">
                       <!-- radio -->
                       <div class="form-group">
-                          <label class="col-form-label" for="category">Select Category</label>
-                          <select name="category" id="category" class="form-control select2">
+                          <label class="col-form-label" for="category">Select Instructor</label>
+                          <select name="instructor_name" id="category" class="form-control select2">
                             <?php while($row = mysqli_fetch_assoc($getInstructor)){ ?>
                             <option value="<?php echo $row['id'] ?>"><?php echo $row['instructor_name'] ?></option>
                             <?php } ?>
@@ -86,7 +90,7 @@ if(isset($_POST['submit'])){
                       <div class="form-group">
                             <label for="classdatetime" class="col-form-label">Class Date & Time</label>
                             <div class="input-group date" id="timepicker" data-target-input="nearest">
-                                <input type='text' class="form-control" id='datetimepicker4' />
+                                <input type='text' class="form-control" id='datetimepicker4' name="class_date_time"/>
                                 <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fas fa-calendar-week"></i></div>
                                 </div>
@@ -104,7 +108,7 @@ if(isset($_POST['submit'])){
                       <div class="col-sm-6">
                           <label for="class_img" class="col-form-label">Class Image</label>
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile">
+                            <input type="file" class="custom-file-input" id="customFile" name="class_img">
                             <label class="custom-file-label" for="customFile">Choose file</label>
                           </div>
                       </div>
@@ -133,6 +137,8 @@ include('includes/footer.php');
     $('.select2').select2({
       theme: 'bootstrap4'
     });
-    $('#classdatetime').datetimepicker();
+    $('#classdatetime').datetimepicker({
+      format: 'HH:mm',
+    });
   })
 </script>

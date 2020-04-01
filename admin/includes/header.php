@@ -1,5 +1,6 @@
 <?php 
 session_start();
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 include '../class/database.php';
 include '../class/UserClass.php';
 $database = new Database();
@@ -9,6 +10,7 @@ $uid = $_SESSION['id'];
 if(!$user->get_session()){
   header('location: ../login.php');
 }  
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,15 +1,10 @@
 <?php
 include('includes/header.php');
-include '../class/database.php';
-include '../class/UserClass.php';
-$database = new Database();
-$db = $database->getConnection();
-
-$result = new User($db);
-$user = $result->getUser();
+$user = $user->getUser();
 
 while( $row = mysqli_fetch_assoc($user)){
     echo $row['name'];
+    
 }
 
 ?>
@@ -23,7 +18,7 @@ while( $row = mysqli_fetch_assoc($user)){
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Instructor</a></li>
+              <li class="breadcrumb-item"><a href="#">Users > Users List</a></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
