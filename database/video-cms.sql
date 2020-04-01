@@ -2,9 +2,9 @@
 -- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 01, 2020 at 04:27 PM
--- Server version: 10.2.6-MariaDB-log
+-- Host: 127.0.0.1
+-- Generation Time: Apr 01, 2020 at 07:34 PM
+-- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -42,7 +42,8 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`id`, `category_name`, `category_slug`, `created_at`, `updated_at`) VALUES
 (19, 'Category 1', 'category-1', '2020-04-01 17:53:02', NULL),
-(20, 'Category 2', 'category-2', '2020-04-01 18:09:17', '2020-04-01 18:19:58');
+(20, 'Category 2', 'category-2', '2020-04-01 18:09:17', '2020-04-01 18:19:58'),
+(22, 'dsadas', 'asda', '2020-04-01 22:37:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -54,7 +55,7 @@ CREATE TABLE `classes` (
   `id` int(11) NOT NULL,
   `class_name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `instructor_id` bigint(100) NOT NULL,
-  `category_id` datetime NOT NULL,
+  `category_id` int(11) NOT NULL,
   `class_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `class_description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_time` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -62,6 +63,19 @@ CREATE TABLE `classes` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `classes`
+--
+
+INSERT INTO `classes` (`id`, `class_name`, `instructor_id`, `category_id`, `class_img`, `class_description`, `date_time`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'sdasd', 14, 20, NULL, '<p>dsadas</p>', '2020-04-01 22:37:31', '2020-04-01 22:37:31', NULL, NULL),
+(2, 'name', 15, 20, NULL, '<p>sdfas</p>', '04/30/2020 10:46 PM', '2020-04-01 22:47:11', NULL, NULL),
+(3, 'name', 15, 20, NULL, '<p>sdfas</p>', '04/30/2020 10:46 PM', '2020-04-01 22:47:22', NULL, NULL),
+(4, 'name12', 14, 20, NULL, '<p>sdasd AS</p>', '04/15/2020 11:27 PM', '2020-04-01 23:27:28', NULL, NULL),
+(5, 'NEW', 14, 22, NULL, '<p>DFS FAS</p>', '04/23/2020 11:29 PM', '2020-04-01 23:29:15', NULL, NULL),
+(6, 'name', 14, 19, NULL, '<p>&nbsp;SADF ASDF ASF AS</p>', '04/29/2020 11:29 PM', '2020-04-01 23:29:54', NULL, NULL),
+(7, 'sdasd', 14, 19, NULL, '<p>dfasdfs</p>', '04/30/2020 11:30 PM', '2020-04-01 23:30:35', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83,7 +97,10 @@ CREATE TABLE `instructor` (
 --
 
 INSERT INTO `instructor` (`id`, `instructor_name`, `gender`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(14, 'John', 'Male', '2020-04-01 19:18:45', NULL, NULL);
+(14, 'John', 'Male', '2020-04-01 19:18:45', NULL, NULL),
+(15, 'ffs', 'Female', '2020-04-01 22:36:21', NULL, NULL),
+(16, 'eqweq', 'Female', '2020-04-01 22:36:27', NULL, NULL),
+(17, '2222', 'Female', '2020-04-01 22:36:41', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -162,19 +179,19 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `instructor`
 --
 ALTER TABLE `instructor`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
