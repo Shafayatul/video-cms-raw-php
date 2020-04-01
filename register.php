@@ -1,6 +1,6 @@
 <?php 
 include 'class/database.php';
-include 'class/User.php';
+include 'class/UserClass.php';
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);

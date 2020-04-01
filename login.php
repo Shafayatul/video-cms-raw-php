@@ -1,16 +1,14 @@
 <?php 
 include 'class/database.php';
-include 'class/User.php';
+include 'class/UserClass.php';
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);
 if(isset($_POST['submit']) ){
   // die('eeee');
- 
-    $useremail = $user->sanitize($_POST['email']);
-    $userpass = $user->sanitize($_POST['password']);
-    $result = $user->loginuser($useremail,$userpass);
-  
+  $useremail = $user->sanitize($_POST['email']);
+  $userpass = $user->sanitize($_POST['password']);
+  $result = $user->loginuser($useremail,$userpass);
 
   }
 ?>

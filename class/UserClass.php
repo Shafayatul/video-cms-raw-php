@@ -34,13 +34,33 @@ Class User{
         $result = mysqli_query($this->connection, $result);
         return $result;
     }
+    public function viewUserinfo($id=null)
+		{
+			$sql = "SELECT * FROM users";
+			if($id){ $sql .= " WHERE id=$id";}
+			// print_r($sql);
+			$result = mysqli_query($this->connection,$sql);
+			return $result;
+		}
 
     public function loginuser($useremail,$userpass){
-        
-        $result = "SELECT * FROM users WHERE email= '$useremail'";
+        $userpassword = password_hash($userpass, PASSWORD_DEFAULT);
+        // $sql = "SELECT id FROM users WHERE password= '$userpassword ' AND email = '$useremail";
+        $sql = "SELECT * FROM usres";
         // echo "<pre>";
         // print_r($result);exit;
-        $result = mysqli_query($this->connection, $result);
+        $result = mysqli_query($this->connection, $sql);
+
+        // $user = mysqli_fetch_array($result);
+        // $count_row = $result->num_rows;
+        // if($count_row == 1){
+        //     $_SESSION['login'] = true;
+        //     $_SESSION['id'] = $user['id'];
+        //     return true;
+        // }
+        // else {
+        //     return false;
+        // }
         
         if(mysqli_num_rows($result) > 0)  
            {  
@@ -63,6 +83,9 @@ Class User{
            {  
                 echo '<script>alert("Wrong User Details")</script>';  
            }  
+    }
+    public function get_session(){
+        return $_SESSION['login'];
     }
 }
 ?>
