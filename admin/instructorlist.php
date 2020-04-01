@@ -1,8 +1,6 @@
 <?php 
 include('includes/header.php');
-include('../class/database.php');
 include('../class/InstractorClass.php');
-$database = new Database();
 $db = $database->getConnection();
 $instructor = new InstructorClass($db);
 $result = $instructor->getInstructor();
