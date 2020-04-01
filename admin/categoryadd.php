@@ -47,7 +47,7 @@ if(isset($_POST['submit'])){
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <?php if (isset($msg_succ)): ?>
+                <?php if (isset($msg_succ)): ?>
                     <span><?php echo $msg_succ ?></span>
                 <?php endif ?>
                 <form role="form" action="" method="POST">

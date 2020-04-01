@@ -10,7 +10,7 @@ $instructor = new InstructorClass($db);
 // $instructor->addInstructor();
 $getCategory = $category->viewCategory();
 $getInstructor = $instructor->viewInstructor();
-
+$message = '';
 if(isset($_POST['submit'])){
     $class_name = $classes->sanitize($_POST['class_name']);
     $category_name = $classes->sanitize($_POST['category_name']);
@@ -18,7 +18,14 @@ if(isset($_POST['submit'])){
     $class_date_time = $classes->sanitize($_POST['class_date_time']);
     $classdescription = addslashes($_POST['classdescription']);
     // $class_img = $classes->sanitize($_POST['class_img']);
+
     $result = $classes->addClasses($class_name,$category_name,$instructor_name,$class_date_time,$classdescription);
+    print_r($result);
+    if ($result) {
+        $msg_succ='<div class="alert alert-success">Class Added Successfully</div>';
+    }else {
+        $msg_succ='<div class="alert alert-danger">Error!! Please try again:</div>';
+    }
 }
 ?>
     <!-- Content Header (Page header) -->
@@ -52,6 +59,9 @@ if(isset($_POST['submit'])){
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                <?php if (isset($msg_succ)): ?>
+                    <span><?php echo $msg_succ ?></span>
+                <?php endif ?>
                 <form role="form" action="" method="POST">
                   <div class="row">
                       <div class="col-sm-6">

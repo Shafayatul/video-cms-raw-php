@@ -1,9 +1,15 @@
 <?php 
 include('includes/header.php');
 include('../class/ClassesClass.php');
+include('../class/CategoryClass.php');
+include('../class/InstractorClass.php');
 $db = $database->getConnection();
-$instructor = new Classes($db);
-// $instructor->addInstructor();
+$class = new Classes($db);
+$result = $class->viewClasses();
+$instructor = new InstructorClass($db);
+$instructorArray = $instructor->instructorArray();
+$category = new Category($db);
+$categoryArray = $category->categoryArray();
 ?>
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -11,7 +17,7 @@ $instructor = new Classes($db);
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Instructor</h1>
-
+            
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -25,57 +31,68 @@ $instructor = new Classes($db);
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-12 col-12">
-              <!-- general form elements disabled -->
-            <div class="card card-warning">
-              <div class="card-header">
-                <h3 class="card-title">Instructor Add</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <form role="form" action="" method="POST">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <!-- input states -->
-                        <div class="form-group">
-                            <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Name</label>
-                            <input type="text" class="form-control" id="instructorname" name="instructorname" placeholder="Enter Instructor Name">
-                        </div>
-                    </div>
-                </div>
-
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <!-- radio -->
-                      <div class="form-group">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" value="Male">
-                          <label class="form-check-label">Male</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" value="Female" checked>
-                          <label class="form-check-label">Female</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="">
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                  </div>
-
-                </form>
-              </div>
-              <!-- /.card-body -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Instructor List</h3>
             </div>
-            <!-- /.card -->
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="instructortablelist" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Instructor</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <?php while($row = mysqli_fetch_assoc($result)) { ?>
+                <tr>
+                  <td><?php echo $row['class_name'] ?></td>
+                  <td><?php echo $categoryArray[$row['category_id']] ?> </td>
+                  <td><?php echo $instructorArray[$row['instructor_id']] ?> </td>
+                  <td>
+                    <a ><i class="fas fa-edit text-warning"></i></a>
+                    <a ><i class="fas fa-trash-alt text-danger"></i></a>
+                  </td>
+                </tr>
+                  <?php } ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Action</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
           </div>
+          <!-- /.card -->
         </div>
+        <!-- /.col -->
       </div>
+      <!-- /.row -->
     </section>
+
 
 <?php 
 include('includes/footer.php');
 ?>
+
+<script>
+  $(function () {
+    $('#instructortablelist').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>

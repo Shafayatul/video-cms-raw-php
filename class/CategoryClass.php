@@ -60,5 +60,16 @@ class Category{
         $result = mysqli_query($this->connection, $sql);
         return $result;
     }
+
+    public function categoryArray(){
+        $sql = "SELECT `id`, `category_name` FROM $this->table_name";
+        $result = mysqli_query($this->connection,$sql);
+        $data = [];
+        while($row = mysqli_fetch_assoc($result)) {
+            $data[$row['id']] = $row['category_name'];
+        }
+        return $data;
+    }
+
 }
 ?>

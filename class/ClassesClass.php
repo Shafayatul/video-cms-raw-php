@@ -19,9 +19,13 @@ class Classes{
         $datetime = date('Y-m-d H:i:s');
         $sql = "INSERT INTO $this->table_name (`class_name`, `instructor_id`, `category_id`, `class_description`, `date_time`, `created_at` ) 
         VALUES ('$class_name','$instructor_name','$category_name','$classdescription', '$class_date_time','$datetime')";
-        print_r($sql);exit;
-        $result = mysqli_query($this->connection, $sql);
-        print_r( $result);exit;
+        return $result = mysqli_query($this->connection, $sql);
     }
+    public function viewClasses(){
+        $sql = "SELECT * FROM $this->table_name";
+        $result = mysqli_query($this->connection,$sql);
+        return $result;
+    }
+
 }
 ?>

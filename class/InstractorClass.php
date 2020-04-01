@@ -49,5 +49,15 @@ class InstructorClass{
         $result = mysqli_query($this->connection, $sql);
         return $result;
     }
+    public function instructorArray(){
+        $sql = "SELECT `id`, `instructor_name` FROM instructor";
+        $result = mysqli_query($this->connection,$sql);
+        $data = [];
+        while($row = mysqli_fetch_assoc($result)) {
+            $data[$row['id']] = $row['instructor_name'];
+        }
+        return $data;
+    }
+
 }
 ?>
