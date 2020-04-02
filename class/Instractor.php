@@ -1,5 +1,5 @@
 <?php
-class InstructorClass{
+class Instructor{
     public $table_name = 'instructor';
     public $connection;
     

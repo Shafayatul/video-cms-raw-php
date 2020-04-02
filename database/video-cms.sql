@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2020 at 07:34 PM
+-- Generation Time: Apr 02, 2020 at 08:33 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -43,7 +43,8 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`id`, `category_name`, `category_slug`, `created_at`, `updated_at`) VALUES
 (19, 'Category 1', 'category-1', '2020-04-01 17:53:02', NULL),
 (20, 'Category 2', 'category-2', '2020-04-01 18:09:17', '2020-04-01 18:19:58'),
-(22, 'dsadas', 'asda', '2020-04-01 22:37:12', NULL);
+(22, 'dsadas', 'asda', '2020-04-01 22:37:12', NULL),
+(23, '111111', '1111', '2020-04-02 12:25:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -75,7 +76,8 @@ INSERT INTO `classes` (`id`, `class_name`, `instructor_id`, `category_id`, `clas
 (4, 'name12', 14, 20, NULL, '<p>sdasd AS</p>', '04/15/2020 11:27 PM', '2020-04-01 23:27:28', NULL, NULL),
 (5, 'NEW', 14, 22, NULL, '<p>DFS FAS</p>', '04/23/2020 11:29 PM', '2020-04-01 23:29:15', NULL, NULL),
 (6, 'name', 14, 19, NULL, '<p>&nbsp;SADF ASDF ASF AS</p>', '04/29/2020 11:29 PM', '2020-04-01 23:29:54', NULL, NULL),
-(7, 'sdasd', 14, 19, NULL, '<p>dfasdfs</p>', '04/30/2020 11:30 PM', '2020-04-01 23:30:35', NULL, NULL);
+(7, 'sdasd', 14, 19, NULL, '<p>dfasdfs</p>', '04/30/2020 11:30 PM', '2020-04-01 23:30:35', NULL, NULL),
+(8, '33333', 14, 19, NULL, '<p>3333</p>', '04/23/2020 11:29 PM', '2020-04-02 12:26:27', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,8 @@ INSERT INTO `instructor` (`id`, `instructor_name`, `gender`, `created_at`, `upda
 (14, 'John', 'Male', '2020-04-01 19:18:45', NULL, NULL),
 (15, 'ffs', 'Female', '2020-04-01 22:36:21', NULL, NULL),
 (16, 'eqweq', 'Female', '2020-04-01 22:36:27', NULL, NULL),
-(17, '2222', 'Female', '2020-04-01 22:36:41', NULL, NULL);
+(17, '2222', 'Female', '2020-04-01 22:36:41', NULL, NULL),
+(18, '222222', 'Female', '2020-04-02 12:26:04', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -179,19 +182,19 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `instructor`
 --
 ALTER TABLE `instructor`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `users`

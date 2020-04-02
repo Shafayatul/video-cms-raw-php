@@ -2,7 +2,7 @@
 session_start();
 ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 include '../class/database.php';
-include '../class/UserClass.php';
+include '../class/User.php';
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);

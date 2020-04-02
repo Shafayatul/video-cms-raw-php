@@ -1,7 +1,7 @@
 <?php
 ob_start();
 include('includes/header.php');
-include('../class/CategoryClass.php');
+include('../class/Category.php');
 $db = $database->getConnection();
 $category = new Category($db);
 $category_id = $_GET['id'];

@@ -1,12 +1,12 @@
 <?php 
 include('includes/header.php');
-include('../class/ClassesClass.php');
-include('../class/CategoryClass.php');
-include('../class/InstractorClass.php');
+include('../class/Classes.php');
+include('../class/Category.php');
+include('../class/Instractor.php');
 $db = $database->getConnection();
 $class = new Classes($db);
 $result = $class->viewClasses();
-$instructor = new InstructorClass($db);
+$instructor = new Instructor($db);
 $instructorArray = $instructor->instructorArray();
 $category = new Category($db);
 $categoryArray = $category->categoryArray();

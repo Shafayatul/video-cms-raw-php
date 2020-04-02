@@ -1,8 +1,8 @@
 <?php 
 include('./includes/header.php');
-include('../class/InstractorClass.php');
+include('../class/Instractor.php');
 $db = $database->getConnection();
-$instructor = new InstructorClass($db);
+$instructor = new Instructor($db);
 $result = $instructor->viewInstructor();
 ?>
     <!-- Content Header (Page header) -->

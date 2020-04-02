@@ -1,6 +1,6 @@
 <?php 
 include('./includes/header.php');
-include('../class/CategoryClass.php');
+include('../class/Category.php');
 $db = $database->getConnection();
 $instructor = new Category($db);
 $result = $instructor->viewCategory();
