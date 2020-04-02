@@ -8,7 +8,9 @@ $instructor = new Category($db);
 if(isset($_POST['submit'])){
     $categoryname = $instructor->sanitize($_POST['category_name']);
     $categoryslug = $instructor->sanitize($_POST['category_slug']);
-    $result = $instructor->addCategory($categoryname,$categoryslug);
+    $category_img =  $instructor->sanitize($_FILES['category_img']['name']);
+    // print_r($category_img);exit;
+    $result = $instructor->addCategory($categoryname,$categoryslug,$category_img);
     if ($result == true) {
         $msg_succ='<div class="alert alert-success">Category Added Successfully</div>';
     }else {
@@ -50,21 +52,31 @@ if(isset($_POST['submit'])){
                 <?php if (isset($msg_succ)): ?>
                     <span><?php echo $msg_succ ?></span>
                 <?php endif ?>
-                <form role="form" action="" method="POST">
+                <form role="form" action="" method="POST"  enctype="multipart/form-data">
                   <div class="row">
                       <div class="col-sm-6">
                           <!-- input states -->
                           <div class="form-group">
                               <label class="col-form-label" for="category_name"> Category Name</label>
-                              <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Class Name">
+                              <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Class Name" >
                           </div>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                             <label class="col-form-label" for="category_slug">Slug</label>
-                            <input type="text" class="form-control" id="category_slug" name="category_slug" placeholder="Enter slug Name">
+                            <input type="text" class="form-control" id="category_slug" name="category_slug" placeholder="Enter slug Name" >
                           </div>
                       </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="category_img">Category Image</label>
+                          <input type="file" name="category_img" id="category_img" class="form-control" placeholder="" aria-describedby="helpId" required>
+                          <img id="blah" src="../dist/img/photo4.jpg" width="100%" height="200"/>
+                          <!-- <small id="helpId" class="text-muted">ADD Category Image</small> -->
+                        </div>
+                    </div>
                   </div>
                   <div class="">
                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -83,3 +95,20 @@ if(isset($_POST['submit'])){
 <?php 
 include('includes/footer.php');
 ?>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      
+      reader.onload = function(e) {
+        $('#blah').attr('src', e.target.result);
+      }
+      
+      reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+  }
+
+  $("#category_img").change(function() {
+    readURL(this);
+  });
+</script>

@@ -10,7 +10,12 @@ $result = mysqli_fetch_assoc($getresult);
 if(isset($_POST['submit'])){
     $instructorname = $instructor->sanitize($_POST['instructorname']);
     $instructorgender = $instructor->sanitize($_POST['gender']);
-    $result = $instructor->addInstructor($instructorname,$instructorgender);
+    $instructoradd = $instructor->updateInstructor($instructorname,$instructorgender,$instructor_id);
+    if($instructoradd){
+      $success_msg = "Instructor Updated Successfully";
+      $getresult = $instructor->getInstructor($instructor_id);
+      $result = mysqli_fetch_assoc($getresult);
+    }
 }
 ?>
     <!-- Content Header (Page header) -->
@@ -44,13 +49,14 @@ if(isset($_POST['submit'])){
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                <p class="bg-success "><?php if(!empty($success_msg)){echo $success_msg;} ?></p>
                 <form role="form" action="" method="POST">
                 <div class="row">
                     <div class="col-sm-6">
                         <!-- input states -->
                         <div class="form-group">
                             <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Name</label>
-                            <input type="text" class="form-control" id="instructorname" name="instructorname" value="<?php $result['instructor_name']; ?>" placeholder="Enter Instructor Name">
+                            <input type="text" class="form-control" id="instructorname" name="instructorname" value="<?php echo $result['instructor_name']; ?>" placeholder="Enter Instructor Name">
                         </div>
                     </div>
                 </div>
@@ -59,19 +65,22 @@ if(isset($_POST['submit'])){
                     <div class="col-sm-6">
                       <!-- radio -->
                       <div class="form-group">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" value="Male">
-                          <label class="form-check-label">Male</label>
+                        <div class="icheck-primary d-inline">
+                          <input type="radio" id="radioPrimary1" name="gender" value="Male" <?php echo ($result['gender']=='Male')?'checked':'' ?>>
+                          <label for="radioPrimary1">Male
+                          </label>
                         </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" value="Female" checked>
-                          <label class="form-check-label">Female</label>
+                        <div class="icheck-primary d-inline">
+                          <input type="radio" id="radioPrimary2" name="gender" value="Female" <?php echo ($result['gender']=='Female')?'checked':'' ?>>
+                          <label for="radioPrimary2">Female
+                          </label>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="">
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="submit"  class="btn btn-success">Submit</button>
+                    <a  href="instructorlist.php" class="btn btn-primary">Back to List</a>
                   </div>
 
                 </form>

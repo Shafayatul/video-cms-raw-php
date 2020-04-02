@@ -1,6 +1,6 @@
 <?php 
 session_start();
-ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+// ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 include '../class/database.php';
 include '../class/User.php';
 $database = new Database();
@@ -33,6 +33,7 @@ if(!$user->get_session()){
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../dist/css/admincustom.css">
+  <link rel="stylesheet" href="../dist/css/jquery.datetimepicker.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->

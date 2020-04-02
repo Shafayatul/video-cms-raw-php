@@ -16,15 +16,15 @@ if(isset($_POST['submit'])){
     $category_name = $classes->sanitize($_POST['category_name']);
     $instructor_name = $classes->sanitize($_POST['instructor_name']);
     $class_date_time = $classes->sanitize($_POST['class_date_time']);
-    $classdescription = addslashes($_POST['classdescription']);
-    // $class_img = $classes->sanitize($_POST['class_img']);
+    $classdescription = $classes->sanitize($_POST['classdescription']);
+    $class_img = $classes->sanitize($_FILES['class_img']['name']);
 
-    $result = $classes->addClasses($class_name,$category_name,$instructor_name,$class_date_time,$classdescription);
-    print_r($result);
+    $result = $classes->addClasses($class_name,$category_name,$instructor_name,$class_img,$class_date_time,$classdescription);
+    // print_r($result);
     if ($result) {
-        $msg_succ='<div class="alert alert-success">Class Added Successfully</div>';
+        $message='<div class="alert alert-success">Class Added Successfully</div>';
     }else {
-        $msg_succ='<div class="alert alert-danger">Error!! Please try again:</div>';
+        $message='<div class="alert alert-danger">Error!! Please try again:</div>';
     }
 }
 ?>
@@ -59,10 +59,10 @@ if(isset($_POST['submit'])){
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <?php if (isset($msg_succ)): ?>
-                    <span><?php echo $msg_succ ?></span>
+                <?php if (isset($message)): ?>
+                    <span><?php echo $message ?></span>
                 <?php endif ?>
-                <form role="form" action="" method="POST">
+                <form role="form" action="" method="POST" enctype="multipart/form-data">
                   <div class="row">
                       <div class="col-sm-6">
                           <!-- input states -->
@@ -116,12 +116,13 @@ if(isset($_POST['submit'])){
                           style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                       </div>
                       <div class="col-sm-6">
-                          <label for="class_img" class="col-form-label">Class Image</label>
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" name="class_img">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                          </div>
-                      </div>
+                        <div class="form-group">
+                          <label for="class_img">Class Image</label>
+                          <input type="file" name="class_img" id="class_img" class="form-control" placeholder="" aria-describedby="helpId" required>
+                          <img id="class-img" src="../dist/img/photo4.jpg" width="100%" height="200"/>
+                          <!-- <small id="helpId" class="text-muted">ADD Category Image</small> -->
+                        </div>
+                    </div>
                   </div>
                   <div class="">
                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -148,7 +149,23 @@ include('includes/footer.php');
       theme: 'bootstrap4'
     });
     $('#classdatetime').datetimepicker({
-      format: 'HH:mm',
+      format: 'Y-m-d H:i'
     });
+    
   })
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      
+      reader.onload = function(e) {
+        $('#class-img').attr('src', e.target.result);
+      }
+      
+      reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+  }
+
+  $("#category_img").change(function() {
+    readURL(this);
+  });
 </script>

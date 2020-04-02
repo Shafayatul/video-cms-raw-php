@@ -6,6 +6,8 @@ class Instructor{
     public function __construct($db)
     {
         $this->connection = $db;
+        date_default_timezone_set('Asia/Dhaka');
+        $datetime = date('Y-m-d H:i:s');
     }
 
     public function sanitize($var){
@@ -38,8 +40,10 @@ class Instructor{
         return $result;
     }
 
-    public function updateInstructor($instructor_id){
-        $sql = "UPDATE $this->table_name SET  WHERE id = $instructor_id";
+    public function updateInstructor($instructorname,$instructorgender,$instructor_id){
+        date_default_timezone_set('Asia/Dhaka');
+        $datetime = date('Y-m-d H:i:s');
+        $sql = "UPDATE $this->table_name SET `instructor_name`= '$instructorname', `gender`='$instructorgender', `created_at`='$datetime'   WHERE id = $instructor_id";
         $result = mysqli_query($this->connection,$sql);
         return $result;
     }

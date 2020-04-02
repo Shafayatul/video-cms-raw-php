@@ -9,6 +9,9 @@ if(isset($_POST['submit'])){
     $instructorname = $instructor->sanitize($_POST['instructorname']);
     $instructorgender = $instructor->sanitize($_POST['gender']);
     $result = $instructor->addInstructor($instructorname,$instructorgender);
+    if($result){
+      $success_msg = "Instructor Added Successfully";
+    }
 }
 ?>
     <!-- Content Header (Page header) -->
@@ -42,6 +45,7 @@ if(isset($_POST['submit'])){
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                <p class="bg-success"><?php if(!empty($success_msg)){ echo $success_msg; }?></p>
                 <form role="form" action="" method="POST">
                 <div class="row">
                     <div class="col-sm-6">
@@ -69,7 +73,8 @@ if(isset($_POST['submit'])){
                     </div>
                   </div>
                   <div class="">
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                    <a  href="instructorlist.php" class="btn btn-primary">Back to List</a>
                   </div>
 
                 </form>

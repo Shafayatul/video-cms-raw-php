@@ -45,6 +45,7 @@ $categoryArray = $category->categoryArray();
                   <th>Name</th>
                   <th>Category</th>
                   <th>Instructor</th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -54,8 +55,8 @@ $categoryArray = $category->categoryArray();
                   <td><?php echo $categoryArray[$row['category_id']] ?> </td>
                   <td><?php echo $instructorArray[$row['instructor_id']] ?> </td>
                   <td>
-                    <a ><i class="fas fa-edit text-warning"></i></a>
-                    <a ><i class="fas fa-trash-alt text-danger"></i></a>
+                    <a href="classedit.php?id=<?php echo $row['id']; ?>"><i class="fas fa-edit text-warning"></i></a>
+                    <a href="classdelete.php?id=<?php echo $row['id']; ?>"><i class="fas fa-trash-alt text-danger"></i></a>
                   </td>
                 </tr>
                   <?php } ?>

@@ -45,19 +45,10 @@ Class User{
 
     public function loginuser($useremail,$userpass){
         $userpass = md5($userpass);
-        // print_r($userpass);
         $sql = "SELECT id FROM users WHERE password= '$userpass' and email = '$useremail'";
-        // $sql = "SELECT * FROM usres";
-        // echo "<pre>";
-        // print_r($sql);exit;
         $result = mysqli_query($this->connection, $sql);
-        // echo "<pre>";
-        // print_r($result);exit;
         $user = mysqli_fetch_array($result);
         $count_row = $result->num_rows;
-        // echo "<pre>";
-        // print_r($count_row);exit;
-        
         if($count_row == 1){
             $_SESSION['login'] = true;
             $_SESSION['id'] = $user['id'];
@@ -66,31 +57,46 @@ Class User{
         else {
             return false;
         }
-        
-        // if(mysqli_num_rows($result) > 0)  
-        //    {  
-        //         while($row = mysqli_fetch_array($result))  
-        //         {  
-        //              if(password_verify($userpass, $row["password"]))  
-        //              {  
-        //                   //return true;  
-        //                   $_SESSION["email"] = $useremail;  
-        //                   header("location:admin/dashboard.php");  
-        //              }  
-        //              else  
-        //              {  
-        //                   //return false;  
-        //                   echo '<script>alert("Wrong User Details")</script>';  
-        //              }  
-        //         }  
-        //    }  
-        //    else  
-        //    {  
-        //         echo '<script>alert("Wrong User Details")</script>';  
-        //    }  
     }
     public function get_session(){
         return $_SESSION['login'];
     }
+
+    public function addPublicUser($user_number,$user_password){
+        // die(1111);
+        date_default_timezone_set('Asia/Dhaka');
+        $datetime = date('Y-m-d H:i:s');
+        $password = md5($user_password); 
+        $users= "SELECT * FROM $this->table_name WHERE email='$user_number'";
+        // print_r($get_user);exit;
+        $user_result = mysqli_query($this->connection, $users);  
+        if(mysqli_num_rows($user_result) > 0){
+            $msg = "Category Already Exist";
+        }else{
+            $sql = "INSERT INTO `users`( `email`, `password`, `type`, `created_at`) VALUES ('$user_number', '$password', 1,'$datetime')";
+            // print_r($sql);exit;
+            
+            $result = mysqli_query($this->connection,$sql);
+            // print_r($result);exit;
+            return $result;
+        }
+        
+    }
+    public function loginpublicUser($loginInput,$loginPassword){
+        $userpass = md5($loginPassword);
+        $sql = "SELECT id FROM users WHERE password= '$userpass' and email = '$loginInput'";
+        $result = mysqli_query($this->connection, $sql);
+        $user = mysqli_fetch_array($result);
+        $count_row = $result->num_rows;
+        if($count_row == 1){
+            $_SESSION['login'] = true;
+            $_SESSION['id'] = $user['id'];
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
 ?>

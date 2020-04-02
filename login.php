@@ -1,7 +1,6 @@
 <?php 
-session_start(); 
-include 'class/database.php';
-include 'class/User.php';
+include('class/database.php');
+include('class/User.php');
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);

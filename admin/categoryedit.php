@@ -10,11 +10,16 @@ $result = mysqli_fetch_assoc($category);
 if(isset($_POST['submit'])){
     $categoryname = $instructor->sanitize($_POST['category_name']);
     $categoryslug = $instructor->sanitize($_POST['category_slug']);
-    $result = $instructor->updateCategory($categoryname, $categoryslug, $category_id);
+    $category_img =  $instructor->sanitize($_FILES['category_img']['name']);
+    $result = $instructor->updateCategory($categoryname, $categoryslug,$category_img, $category_id);
     if ($result == true) {
         $msg_succ='<div class="alert alert-success">Category Updated Successfully</div>';
+        $category = $instructor->getCategory($category_id);
+        $result = mysqli_fetch_assoc($category);
     }else {
         $msg_succ='<div class="alert alert-danger">Data Already EXIST:</div>';
+        $category = $instructor->getCategory($category_id);
+        $result = mysqli_fetch_assoc($category);
     }
 }
 ?>
@@ -50,10 +55,10 @@ if(isset($_POST['submit'])){
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <?php if (isset($msg_succ)): ?>
+              <?php if (!empty($msg_succ)): ?>
                     <span><?php echo $msg_succ ?></span>
                 <?php endif ?>
-                <form role="form" action="" method="POST">
+                <form role="form" action="" method="POST" enctype="multipart/form-data">
                   <div class="row">
                       <div class="col-sm-6">
                           <!-- input states -->
@@ -68,6 +73,16 @@ if(isset($_POST['submit'])){
                             <input type="text" class="form-control" id="category_slug" name="category_slug" value="<?php echo $result['category_slug'] ?>" placeholder="Enter slug Name">
                           </div>
                       </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="category_img">Category Image</label>
+                          <input type="file" name="category_img" id="category_img" value="<?php echo $result['category_img']; ?>" class="form-control" placeholder="" aria-describedby="helpId" required>
+                          <img id="blah" src="../uploads/category/<?php echo $result['category_img']; ?>" width="100%" height="200"/>
+                          <!-- <small id="helpId" class="text-muted">ADD Category Image</small> -->
+                        </div>
+                    </div>
                   </div>
                   <div class="">
                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -86,3 +101,20 @@ if(isset($_POST['submit'])){
 <?php 
 include('includes/footer.php');
 ?>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      
+      reader.onload = function(e) {
+        $('#blah').attr('src', e.target.result);
+      }
+      
+      reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+  }
+
+  $("#category_img").change(function() {
+    readURL(this);
+  });
+</script>

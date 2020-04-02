@@ -13,15 +13,38 @@ class Category{
         $result = mysqli_real_escape_string($this->connection,$var);
         return $result;
     }
-    public function addCategory($categoryname,$categoryslug){
+    public function addCategory($categoryname,$categoryslug,$category_img){
         date_default_timezone_set('Asia/Dhaka');
         $datetime = date('Y-m-d H:i:s');
+        if($category_img){
+            $file = $_FILES['category_img']['tmp_name'];
+            $image = addslashes(file_get_contents($_FILES['category_img']['tmp_name']));
+            $image_name = addslashes($_FILES['category_img']['name']);
+            $extension = strtolower($image_name);
+            // print_r($extension);exit;
+            $image_name_next = uniqid().'.'.$extension;
+            $image_size = getimagesize($_FILES['category_img']['tmp_name']);
+            if($image_size==false){
+                echo 'This is not a image';
+            }else{		
+                if(move_uploaded_file($_FILES['category_img']["tmp_name"],"../uploads/category/" . $_FILES['category_img']["name"])){
+    
+                    rename("../uploads/category/$image_name","../uploads/category/$image_name_next");
+                  
+                }
+                else{
+                    echo 'Error: Image not uploaded in folder';
+                }
+                
+                
+            }
+        }
         $category= "SELECT * FROM $this->table_name WHERE category_name='$categoryname' and category_slug='$categoryslug'";
         $result = mysqli_query($this->connection, $category);
         if(mysqli_num_rows($result) > 0){
             $msg = "Category Already Exist";
         }else{
-            $sql = "INSERT INTO $this->table_name (category_name, category_slug, created_at) VALUES ('$categoryname', '$categoryslug', '$datetime')";
+            $sql = "INSERT INTO $this->table_name (category_name, category_slug, category_img, created_at) VALUES ('$categoryname', '$categoryslug', '$image_name_next', '$datetime')";
             // print_r($sql);exit;
             $result1 = mysqli_query($this->connection, $sql);
             return $result1;
@@ -39,20 +62,37 @@ class Category{
         $result = mysqli_query($this->connection, $sql);
         return $result;
     }
-    public function updateCategory($categoryname,$categoryslug,$category_id){
+    public function updateCategory($categoryname,$categoryslug,$category_img,$category_id){
         date_default_timezone_set('Asia/Dhaka');
         $datetime = date('Y-m-d H:i:s');
-        $category= "SELECT * FROM $this->table_name WHERE category_name='$categoryname' and category_slug='$categoryslug'";
-        $result = mysqli_query($this->connection, $category);
-        // print_r($result);exit;
-        if(mysqli_num_rows($result) > 0){
-            $msg = "Category Already Exist";
-        }else{
-            $sql = "UPDATE $this->table_name SET category_name= '$categoryname', category_slug= '$categoryslug', updated_at='$datetime' WHERE id=$category_id";
-            // print_r($sql);exit;
-            $result1 = mysqli_query($this->connection, $sql);
-            return $result1;
+        if($category_img){
+            $file = $_FILES['category_img']['tmp_name'];
+            $image = addslashes(file_get_contents($_FILES['category_img']['tmp_name']));
+            $image_name = addslashes($_FILES['category_img']['name']);
+            $extension = strtolower($image_name);
+            // print_r($extension);exit;
+            $image_name_next = uniqid().'.'.$extension;
+            $image_size = getimagesize($_FILES['category_img']['tmp_name']);
+            if($image_size==false){
+                echo 'This is not a image';
+            }else{		
+                if(move_uploaded_file($_FILES['category_img']["tmp_name"],"../uploads/category/" . $_FILES['category_img']["name"])){
+    
+                    rename("../uploads/category/$image_name","../uploads/category/$image_name_next");
+                    $sql = "UPDATE $this->table_name SET category_name= '$categoryname', category_slug= '$categoryslug', category_img ='$image_name_next', updated_at='$datetime' WHERE id=$category_id";
+                    // print_r($sql);exit;
+                    $result1 = mysqli_query($this->connection, $sql);
+                    return $result1;
+                  
+                }
+                else{
+                    echo 'Error: Image not uploaded in folder';
+                }
+                
+                
+            }
         }
+     
     }
 
     public function delete($id){
