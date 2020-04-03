@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include('includes/header.php');
 include('class/database.php');
 include('class/User.php');
@@ -8,11 +9,16 @@ $user = new User($db);
 $message = '';
 if (isset($_REQUEST['submit'])) {
   extract($_REQUEST);
-  $user_number = $user->sanitize($_POST['signupPhone']);
-  $user_password = $user->sanitize($_POST['loginPassword']);
-  $result = $user->addPublicUser($user_number,$user_password);
+  $user_email = $user->sanitize($_POST['user_email']);
+  $user_password = $user->sanitize($_POST['user_password']);
+  $result = $user->addPublicUser($user_email,$user_password);
   if($result){
-    $message = "Registration successfull Please Login";
+    $login = $user->loginuser($user_email,$user_password);
+    if ($login) {
+       header("location:user-profile.php");
+    }else{
+        $message = 'Wrong username or password';
+    }
   }
   else{
     $message = "User Already Exist";
@@ -46,12 +52,12 @@ if (isset($_REQUEST['submit'])) {
               <h1 class="h2 form__title">Üye Ol</h1>
               <div class="row">
                 <div class="col-12 form-group">
-                  <label for="signupPhone" class="label-control">Telefon numarası</label>
-                  <input id="signupPhone" name="signupPhone" type="email" class="form-control" placeholder="example@example.com">
+                  <label for="user_email" class="label-control">Telefon numarası</label>
+                  <input id="user_email" name="user_email" type="email" class="form-control" placeholder="example@example.com">
                 </div>
                 <div class="col-12 form-group">
-                  <label for="loginPassword" class="label-control">Şifre</label>
-                  <input id="loginPassword" name="loginPassword" type="password" class="form-control" minlength="3">
+                  <label for="user_password" class="label-control">Şifre</label>
+                  <input id="user_password" name="user_password" type="password" class="form-control" minlength="3">
                 </div>
                 <div class="col-12 form-group d-flex justify-content-center mb-0">
                   <input type="submit" id="submit" name="submit" class="button button--primary u-size-lg" value="Şifre Gönder" />

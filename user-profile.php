@@ -5,7 +5,13 @@ include('class/User.php');
 $database = new Database();
 $db = $database->getConnection();
 $users = new User($db);
-$result = $users->viewUserinfo();
+$is_date_picker = true;
+
+if(!isset($_SESSION['login']) || !$_SESSION['login']) {
+  header('location: user-login.php');
+}  
+
+$result = $users->getCurrentUser();
 $user = mysqli_fetch_assoc($result);
 $message = '';
 if (isset($_POST['update-profile'])) {
@@ -28,7 +34,8 @@ if (isset($_POST['update-profile'])) {
                   </div>';
 
     }
-  $result = $users->viewUserinfo();
+  $result = $users->getCurrentUser();
+  $user = mysqli_fetch_assoc($result);
 }
 
 if (isset($_POST['password-update'])) {
@@ -56,6 +63,9 @@ if (isset($_POST['password-update'])) {
 
 }
 ?>  
+
+
+
 
 <div id="app">
 
@@ -115,8 +125,8 @@ if (isset($_POST['password-update'])) {
               </div>
             </div>
             <div class="col-12 col-md-6 form-group">
-              <label for="birthday" class="label-control">Doğum Tarihi (Yıl/Gün/Ay)</label>
-              <input id="birthday" name="birthday" type="date" class="form-control date" placeholder="2020/01/01" value="<?php echo $user['birthday']?>">
+              <label for="birthday" class="label-control">Doğum Tarihi (Gün/Ay/Yıl)</label>
+              <input id="datepicker" width="100%" class="form-control" value="<?php echo $user['birthday']?>" name="birthday"/>
             </div>
             <div class="col-12 col-md-6 form-group">
               <label for="" class="label-control">Ülke</label>
@@ -210,5 +220,6 @@ if (isset($_POST['password-update'])) {
     </div>
   </div>
 </div>
+
 
 <?php include('includes/footer.php'); ?>

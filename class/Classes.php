@@ -36,7 +36,7 @@ class Classes{
             if($image_size==false){
                 echo 'This is not a image';
             }else{		
-                if(move_uploaded_file($_FILES['class_img']["tmp_name"],"/uploads/class/" . $_FILES['class_img']["name"])){
+                if(move_uploaded_file($_FILES['class_img']["tmp_name"],"../uploads/class/" . $_FILES['class_img']["name"])){
     
                     rename("../uploads/class/$image_name","../uploads/class/$image_name_next");
                     $sql = "INSERT INTO $this->table_name (`class_name`, `instructor_id`, `category_id`, `class_img`,`class_description`, `date_time`, `created_at` ) 

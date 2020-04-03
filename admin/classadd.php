@@ -100,7 +100,7 @@ if(isset($_POST['submit'])){
                       <div class="form-group">
                             <label for="classdatetime" class="col-form-label">Class Date & Time</label>
                             <div class="input-group date" id="timepicker" data-target-input="nearest">
-                                <input type='text' class="form-control" id='datetimepicker4' name="class_date_time"/>
+                                <input type='text' class="form-control" id='datetimepicker4' value="" name="class_date_time"/>
                                 <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fas fa-calendar-week"></i></div>
                                 </div>

@@ -101,25 +101,21 @@ Class User{
         return $_SESSION['login'];
     }
 
-    public function addPublicUser($user_number,$user_password){
-        // die(1111);
+    public function addPublicUser($user_email,$user_password){
         date_default_timezone_set('Asia/Dhaka');
         $datetime = date('Y-m-d H:i:s');
         $password = md5($user_password); 
-        $users= "SELECT * FROM $this->table_name WHERE email='$user_number'";
+        $sql= "SELECT * FROM $this->table_name WHERE email='$user_email'";
         // print_r($get_user);exit;
-        $user_result = mysqli_query($this->connection, $users);  
-        if(mysqli_num_rows($user_result) > 0){
-            $msg = "Category Already Exist";
+        $user_result = mysqli_query($this->connection, $sql);  
+        if (mysqli_num_rows($user_result) == 0) {
+                $sql = "INSERT INTO `users` ( `email`, `password`, `type`, `created_at`) VALUES ('$user_email', '$password', '2','$datetime')";                
+                $result = mysqli_query($this->connection,$sql);
+                return $result;
         }else{
-            $sql = "INSERT INTO `users`( `email`, `password`, `type`, `created_at`) VALUES ('$user_number', '$password', 1,'$datetime')";
-            // print_r($sql);exit;
-            
-            $result = mysqli_query($this->connection,$sql);
-            // print_r($result);exit;
-            return $result;
+            return false;
         }
-        
+
     }
     public function loginpublicUser($loginInput,$loginPassword){
         $userpass = md5($loginPassword);
