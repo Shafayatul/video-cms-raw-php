@@ -14,6 +14,14 @@ class Classes{
         return $result;
         
     }
+    public function totalPage(){
+        $no_of_records_per_page = 6;
+        $total_pages_sql = "SELECT COUNT(*) FROM $this->table_name";
+        $result = mysqli_query($this->connection,$total_pages_sql);
+        $total_rows = mysqli_fetch_array($result)[0];
+        return $total_pages = ceil($total_rows / $no_of_records_per_page);
+        
+    }
     public function addClasses($class_name,$category_name,$instructor_name,$class_img,$class_date_time,$classdescription){
         date_default_timezone_set('Asia/Dhaka');
         $datetime = date('Y-m-d H:i:s');
@@ -28,7 +36,7 @@ class Classes{
             if($image_size==false){
                 echo 'This is not a image';
             }else{		
-                if(move_uploaded_file($_FILES['class_img']["tmp_name"],"../uploads/class/" . $_FILES['class_img']["name"])){
+                if(move_uploaded_file($_FILES['class_img']["tmp_name"],"/uploads/class/" . $_FILES['class_img']["name"])){
     
                     rename("../uploads/class/$image_name","../uploads/class/$image_name_next");
                     $sql = "INSERT INTO $this->table_name (`class_name`, `instructor_id`, `category_id`, `class_img`,`class_description`, `date_time`, `created_at` ) 
@@ -53,6 +61,16 @@ class Classes{
         $result = mysqli_query($this->connection,$sql);
         return $result;
     }
+    public function viewClassesPaginate($page=1){
+
+        $no_of_records_per_page = 6;
+        $offset = ($page-1) * $no_of_records_per_page; 
+
+        $sql = "SELECT * FROM $this->table_name LIMIT $offset, $no_of_records_per_page";
+        $result = mysqli_query($this->connection,$sql);
+        return $result;
+    }
+
     public function getClasses($class_id){
         $sql = "SELECT * FROM $this->table_name WHERE id= $class_id";
         $result = mysqli_query($this->connection, $sql);
