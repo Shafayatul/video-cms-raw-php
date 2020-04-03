@@ -27,11 +27,11 @@ if(isset($_POST['submit'])){
     $result = $classes->updateClasses($class_name,$category_name,$instructor_name,$class_img,$class_date_time,$classdescription,$class_id);
     if ($result) {
         $msg_succ='<div class="alert alert-success">Class Updated Successfully</div>';
-        $result = $classes->getClasses($class_id);
-        $result = mysqli_fetch_assoc($result);
     }else {
         $msg_succ='<div class="alert alert-danger">Error!! Please try again:</div>';
     }
+    $result = $classes->getClasses($class_id);
+    $result = mysqli_fetch_assoc($result);
 }
 ?>
     <!-- Content Header (Page header) -->

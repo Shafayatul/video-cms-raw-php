@@ -12,7 +12,10 @@ if(isset($_POST['submit'])){
     $instructorgender = $instructor->sanitize($_POST['gender']);
     $instructoradd = $instructor->updateInstructor($instructorname,$instructorgender,$instructor_id);
     if($instructoradd){
-      $success_msg = "Instructor Updated Successfully";
+      $success_msg = "
+                <div class='callout callout-success'>
+                  <p>Instructor Updated Successfully</p>
+                </div>";
       $getresult = $instructor->getInstructor($instructor_id);
       $result = mysqli_fetch_assoc($getresult);
     }
@@ -49,7 +52,8 @@ if(isset($_POST['submit'])){
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <p class="bg-success "><?php if(!empty($success_msg)){echo $success_msg;} ?></p>
+
+                <?php if(!empty($success_msg)){ echo $success_msg; }?>
                 <form role="form" action="" method="POST">
                 <div class="row">
                     <div class="col-sm-6">

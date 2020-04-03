@@ -73,8 +73,6 @@ if(isset($_POST['submit'])){
                         <div class="form-group">
                           <label for="category_img">Category Image</label>
                           <input type="file" name="category_img" id="category_img" class="form-control" placeholder="" aria-describedby="helpId" required>
-                          <img id="blah" src="../dist/img/photo4.jpg" width="100%" height="200"/>
-                          <!-- <small id="helpId" class="text-muted">ADD Category Image</small> -->
                         </div>
                     </div>
                   </div>

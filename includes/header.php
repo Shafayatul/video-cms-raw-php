@@ -1,8 +1,5 @@
 <?php 
 session_start();
-include('class/database.php');
-include('class/User.php');
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

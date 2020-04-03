@@ -1,13 +1,13 @@
 <?php 
 session_start();
-// ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 include '../class/database.php';
 include '../class/User.php';
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);
 $uid = $_SESSION['id'];
-if(!$user->get_session()){
+if(!isset($_SESSION['login']) || !$_SESSION['login'] || ($_SESSION['type'] !=1)) {
   header('location: ../login.php');
 }  
 

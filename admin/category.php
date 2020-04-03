@@ -38,6 +38,7 @@ $result = $instructor->viewCategory();
                 <tr>
                   <th>Name</th>
                   <th>slug</th>
+                  <th>Image</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -46,8 +47,8 @@ $result = $instructor->viewCategory();
                 <tr>
                     <td><?php echo $row['category_name'] ?></td>
                     <td><?php echo $row['category_slug'] ?> </td>
+                    <td><img src="../uploads/category/<?php echo $row['category_img'] ?>" class="img-thumbnail" width="100"> </td>
                     <td>
-                        <a href="" ><i class="fas fa-eye"></i></a>
                         <a href="categoryedit.php?id=<?php echo $row['id']; ?>" ><i class="fas fa-edit text-warning"></i></a>
                         <a href="categorydelete.php?id=<?php echo $row['id']; ?>" ><i class="fas fa-trash-alt text-danger"></i></a>
                     </td>

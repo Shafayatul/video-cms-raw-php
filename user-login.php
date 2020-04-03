@@ -1,19 +1,18 @@
 <?php 
+ob_start();
 include('includes/header.php'); 
+include('class/database.php');
+include('class/User.php');
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);
-$msg = '';
 if (isset($_REQUEST['submit'])) {
     extract($_REQUEST);
-    $login = $user->loginpublicUser($loginInput,$loginPassword);
-    // print_r($login);exit;
+    $login = $user->loginuser($useremail,$userpass);
     if ($login) {
-        // Registration Success
        header("location:user-profile.php");
-    } else {
-        // Registration Failed
-        $msg =  'Wrong username or password';
+    }else{
+        echo 'Wrong username or password';
     }
 }
 ?>
@@ -48,11 +47,11 @@ if (isset($_REQUEST['submit'])) {
               <div class="row">
                 <div class="col-12 form-group">
                   <label for="loginInput" class="label-control">E-posta adresi veya Telefon numarası</label>
-                  <input id="loginInput" name="loginInput" type="email" class="form-control" placeholder="E-posta adresi veya Telefon numarası" minlength="3">
+                  <input id="loginInput" name="useremail" type="email" class="form-control" placeholder="E-posta adresi veya Telefon numarası" minlength="3">
                 </div>
                 <div class="col-12 form-group">
                   <label for="loginPassword" class="label-control">Şifre</label>
-                  <input id="loginPassword" name="loginPassword" type="password" class="form-control" minlength="3">
+                  <input id="loginPassword" name="userpass" type="password" class="form-control" minlength="3">
                 </div>
                 <div class="col-12 form-group d-flex justify-content-center mb-0">
                   <input type="submit" id="submit" name="submit" class="button button--primary u-size-lg" value="Giriş Yap" />

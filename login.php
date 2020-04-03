@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include('class/database.php');
 include('class/User.php');
 $database = new Database();

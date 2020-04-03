@@ -96,6 +96,16 @@ class Category{
     }
 
     public function delete($id){
+
+        $sql = "SELECT * FROM $this->table_name WHERE id='$id'";
+        $result1 = mysqli_query($this->connection, $sql);
+        while ( $row = mysqli_fetch_assoc($result1) )
+        {
+            if (file_exists(("../uploads/category/".$row['category_img']))) {
+               unlink("../uploads/category/".$row['category_img']);
+            }
+        } 
+
         $sql = "DELETE FROM $this->table_name WHERE id=$id";
         $result = mysqli_query($this->connection, $sql);
         return $result;

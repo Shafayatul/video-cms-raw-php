@@ -62,7 +62,6 @@ class Classes{
     public function updateClasses($class_name,$category_name,$instructor_name,$class_img,$class_date_time,$classdescription,$class_id){
         date_default_timezone_set('Asia/Dhaka');
         $datetime = date('Y-m-d H:i:s');
-        print_r($class_img);exit;
         if($class_img){
             $file = $_FILES['class_img']['tmp_name'];
             $image = addslashes(file_get_contents($_FILES['class_img']['tmp_name']));
@@ -89,8 +88,7 @@ class Classes{
                 
                 
             }
-        }
-        else{
+        }else{
             $sql = "UPDATE $this->table_name SET class_name='$class_name', instructor_id='$instructor_name',category_id='$category_name',class_img='$class_img', class_description='$classdescription',date_time='$class_date_time', updated_at = '$datetime' WHERE id =$class_id";
             // print_r($sql);exit;
             $result = mysqli_query($this->connection, $sql);

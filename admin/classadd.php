@@ -113,13 +113,12 @@ if(isset($_POST['submit'])){
                       <div class="col-sm-6">
                       <label for="classdescription" class="col-form-label">DESCRIPTION</label>
                           <textarea class="classdescription" name="classdescription" id="classdescription" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                          style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="class_img">Class Image</label>
                           <input type="file" name="class_img" id="class_img" class="form-control" placeholder="" aria-describedby="helpId" required>
-                          <img id="class-img" src="../dist/img/photo4.jpg" width="100%" height="200"/>
                           <!-- <small id="helpId" class="text-muted">ADD Category Image</small> -->
                         </div>
                     </div>

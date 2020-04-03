@@ -29,6 +29,40 @@ Class User{
             return false;
         }
     }
+
+    public function updateProfile($name, $email, $gender, $birthday, $country, $city, $reasonForRegistration){
+        $sql = "UPDATE `users` SET name = '$name', email = '$email', gender = '$gender', birthday = '$birthday', country = '$country', city = '$city', reasonForRegistration = '$reasonForRegistration' WHERE id='".$_SESSION['id']."'";
+        $result = mysqli_query($this->connection,$sql);
+        if($result){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function updatePassword($currentPassword, $newPassword){
+        $currentPassword = md5($currentPassword);
+        $sql = "SELECT * FROM `users`  WHERE password='$currentPassword' AND id='".$_SESSION['id']."'";
+        $result = mysqli_query($this->connection,$sql);
+        $count_row = $result->num_rows;
+        if($count_row == 1){
+            $newPassword = md5($newPassword);
+            $sql = "UPDATE `users` SET password = '$newPassword' WHERE id='".$_SESSION['id']."'";
+            $result = mysqli_query($this->connection,$sql);
+            if($result){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+
     public function getUser(){
         $result = "SELECT * FROM users";
         $result = mysqli_query($this->connection, $result);
@@ -42,16 +76,21 @@ Class User{
 			$result = mysqli_query($this->connection,$sql);
 			return $result;
 		}
-
+    public function getCurrentUser(){
+        $sql = "SELECT * FROM users WHERE id='".$_SESSION['id']."'";
+        $result = mysqli_query($this->connection,$sql);
+        return $result;
+    }
     public function loginuser($useremail,$userpass){
         $userpass = md5($userpass);
-        $sql = "SELECT id FROM users WHERE password= '$userpass' and email = '$useremail'";
+        $sql = "SELECT * FROM users WHERE password= '$userpass' and email = '$useremail'";
         $result = mysqli_query($this->connection, $sql);
         $user = mysqli_fetch_array($result);
         $count_row = $result->num_rows;
         if($count_row == 1){
             $_SESSION['login'] = true;
             $_SESSION['id'] = $user['id'];
+            $_SESSION['type'] = $user['type'];
             return true;
         }
         else {

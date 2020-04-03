@@ -10,7 +10,10 @@ if(isset($_POST['submit'])){
     $instructorgender = $instructor->sanitize($_POST['gender']);
     $result = $instructor->addInstructor($instructorname,$instructorgender);
     if($result){
-      $success_msg = "Instructor Added Successfully";
+      $success_msg =       $success_msg = "
+                <div class='callout callout-success'>
+                  <p>Instructor Added Successfully</p>
+                </div>";
     }
 }
 ?>
@@ -45,14 +48,14 @@ if(isset($_POST['submit'])){
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <p class="bg-success"><?php if(!empty($success_msg)){ echo $success_msg; }?></p>
+                <?php if(!empty($success_msg)){ echo $success_msg; }?>
                 <form role="form" action="" method="POST">
                 <div class="row">
                     <div class="col-sm-6">
                         <!-- input states -->
                         <div class="form-group">
                             <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Name</label>
-                            <input type="text" class="form-control" id="instructorname" name="instructorname" placeholder="Enter Instructor Name">
+                            <input type="text" class="form-control" id="instructorname" name="instructorname" placeholder="Enter Instructor Name" required>
                         </div>
                     </div>
                 </div>
@@ -61,13 +64,15 @@ if(isset($_POST['submit'])){
                     <div class="col-sm-6">
                       <!-- radio -->
                       <div class="form-group">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" value="Male">
-                          <label class="form-check-label">Male</label>
+                        <div class="icheck-primary d-inline">
+                          <input type="radio" id="radioPrimary1" name="gender" value="Male">
+                          <label for="radioPrimary1">Male
+                          </label>
                         </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" value="Female" checked>
-                          <label class="form-check-label">Female</label>
+                        <div class="icheck-primary d-inline">
+                          <input type="radio" id="radioPrimary2" name="gender" value="Female">
+                          <label for="radioPrimary2">Female
+                          </label>
                         </div>
                       </div>
                     </div>
