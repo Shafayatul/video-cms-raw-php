@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2020 at 08:33 AM
+-- Generation Time: Apr 03, 2020 at 04:30 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -32,6 +32,7 @@ CREATE TABLE `category` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category_name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_img` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -40,11 +41,8 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `category_name`, `category_slug`, `created_at`, `updated_at`) VALUES
-(19, 'Category 1', 'category-1', '2020-04-01 17:53:02', NULL),
-(20, 'Category 2', 'category-2', '2020-04-01 18:09:17', '2020-04-01 18:19:58'),
-(22, 'dsadas', 'asda', '2020-04-01 22:37:12', NULL),
-(23, '111111', '1111', '2020-04-02 12:25:50', NULL);
+INSERT INTO `category` (`id`, `category_name`, `category_slug`, `category_img`, `created_at`, `updated_at`) VALUES
+(30, 'dsadas', 'asda', '5e873938be685.jpg', '2020-04-03 19:25:02', '2020-04-03 19:25:12');
 
 -- --------------------------------------------------------
 
@@ -70,14 +68,7 @@ CREATE TABLE `classes` (
 --
 
 INSERT INTO `classes` (`id`, `class_name`, `instructor_id`, `category_id`, `class_img`, `class_description`, `date_time`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'sdasd', 14, 20, NULL, '<p>dsadas</p>', '2020-04-01 22:37:31', '2020-04-01 22:37:31', NULL, NULL),
-(2, 'name', 15, 20, NULL, '<p>sdfas</p>', '04/30/2020 10:46 PM', '2020-04-01 22:47:11', NULL, NULL),
-(3, 'name', 15, 20, NULL, '<p>sdfas</p>', '04/30/2020 10:46 PM', '2020-04-01 22:47:22', NULL, NULL),
-(4, 'name12', 14, 20, NULL, '<p>sdasd AS</p>', '04/15/2020 11:27 PM', '2020-04-01 23:27:28', NULL, NULL),
-(5, 'NEW', 14, 22, NULL, '<p>DFS FAS</p>', '04/23/2020 11:29 PM', '2020-04-01 23:29:15', NULL, NULL),
-(6, 'name', 14, 19, NULL, '<p>&nbsp;SADF ASDF ASF AS</p>', '04/29/2020 11:29 PM', '2020-04-01 23:29:54', NULL, NULL),
-(7, 'sdasd', 14, 19, NULL, '<p>dfasdfs</p>', '04/30/2020 11:30 PM', '2020-04-01 23:30:35', NULL, NULL),
-(8, '33333', 14, 19, NULL, '<p>3333</p>', '04/23/2020 11:29 PM', '2020-04-02 12:26:27', NULL, NULL);
+(17, 'sdasd', 28, 30, '5e873988baed6.jpg', '<p>iooyui</p>', '15/04/2020 12:00 AM', '2020-04-03 19:25:58', '2020-04-03 19:26:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -89,21 +80,15 @@ CREATE TABLE `instructor` (
   `id` bigint(20) NOT NULL,
   `instructor_name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL
+  `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `instructor`
 --
 
-INSERT INTO `instructor` (`id`, `instructor_name`, `gender`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(14, 'John', 'Male', '2020-04-01 19:18:45', NULL, NULL),
-(15, 'ffs', 'Female', '2020-04-01 22:36:21', NULL, NULL),
-(16, 'eqweq', 'Female', '2020-04-01 22:36:27', NULL, NULL),
-(17, '2222', 'Female', '2020-04-01 22:36:41', NULL, NULL),
-(18, '222222', 'Female', '2020-04-02 12:26:04', NULL, NULL);
+INSERT INTO `instructor` (`id`, `instructor_name`, `gender`, `created_at`) VALUES
+(28, 'eqweq', 'Female', '2020-04-03 19:25:33');
 
 -- --------------------------------------------------------
 
@@ -119,26 +104,23 @@ CREATE TABLE `users` (
   `password_reset` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` bigint(20) NOT NULL DEFAULT 2,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL,
+  `gender` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `birthday` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reasonForRegistration` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `password_reset`, `type`, `created_at`, `updated_at`) VALUES
-(6, 'admin', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', '', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_role`
---
-
-CREATE TABLE `user_role` (
-  `id` int(11) NOT NULL,
-  `role_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `password_reset`, `type`, `created_at`, `updated_at`, `gender`, `birthday`, `country`, `city`, `reasonForRegistration`) VALUES
+(6, 'admin22', 'admin@admin.com', '698d51a19d8a121ce581499d7b701668', '', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'erkek', '06/01/2020', 'tr', '34', 'kilo-vermek'),
+(9, '', 'admasdasin@admin.com', 'd76359230f8eb8bcab0670b0c2b1c12c', NULL, 2, '2020-04-03 16:48:00', NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 'Md, Shafayatul Haque', 'mdshafayatul@gmail.com', 'd76359230f8eb8bcab0670b0c2b1c12c', NULL, 2, '2020-04-03 16:49:02', NULL, 'erkek', '2020-09-04', 'tr', '34', 'bolgesel-incelme'),
+(11, '', 'ad123asin@admin.com', '22f1307fa06ac5fa9baee49a88c0bc76', NULL, 2, '2020-04-03 16:49:31', NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -169,12 +151,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_role`
---
-ALTER TABLE `user_role`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -182,31 +158,25 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `instructor`
 --
 ALTER TABLE `instructor`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `user_role`
---
-ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

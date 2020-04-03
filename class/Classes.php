@@ -29,7 +29,7 @@ class Classes{
             $file = $_FILES['class_img']['tmp_name'];
             $image = addslashes(file_get_contents($_FILES['class_img']['tmp_name']));
             $image_name = addslashes($_FILES['class_img']['name']);
-            $extension = strtolower($image_name);
+            $extension = pathinfo($image_name, PATHINFO_EXTENSION);
             // print_r($extension);exit;
             $image_name_next = uniqid().'.'.$extension;
             $image_size = getimagesize($_FILES['class_img']['tmp_name']);
@@ -84,7 +84,7 @@ class Classes{
         $file = $_FILES['class_img']['tmp_name'];
         $image = addslashes(file_get_contents($_FILES['class_img']['tmp_name']));
         $image_name = addslashes($_FILES['class_img']['name']);
-        $extension =  strtolower($image_name);
+        $extension =  pathinfo($image_name, PATHINFO_EXTENSION);
         $image_name_next = uniqid().'.'.$extension;
         $image_size = getimagesize($_FILES['class_img']['tmp_name']);
 

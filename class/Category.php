@@ -20,7 +20,7 @@ class Category{
             $file = $_FILES['category_img']['tmp_name'];
             $image = addslashes(file_get_contents($_FILES['category_img']['tmp_name']));
             $image_name = addslashes($_FILES['category_img']['name']);
-            $extension = strtolower($image_name);
+            $extension = pathinfo($image_name, PATHINFO_EXTENSION);
             // print_r($extension);exit;
             $image_name_next = uniqid().'.'.$extension;
             $image_size = getimagesize($_FILES['category_img']['tmp_name']);
@@ -69,7 +69,7 @@ class Category{
         $file = $_FILES['category_img']['tmp_name'];
         $image = addslashes(file_get_contents($_FILES['category_img']['tmp_name']));
         $image_name = addslashes($_FILES['category_img']['name']);
-        $extension =  strtolower($image_name);
+        $extension =  pathinfo($image_name, PATHINFO_EXTENSION);
         $image_name_next = uniqid().'.'.$extension;
         $image_size = getimagesize($_FILES['category_img']['tmp_name']);
 
