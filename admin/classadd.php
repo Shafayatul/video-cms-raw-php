@@ -99,11 +99,11 @@ if(isset($_POST['submit'])){
                       <div class="form-group">
                       <div class="form-group">
                             <label for="classdatetime" class="col-form-label">Class Date & Time</label>
-                            <div class="input-group date" id="timepicker" data-target-input="nearest">
-                                <input type='text' class="form-control" id='datetimepicker4' value="" name="class_date_time"/>
-                                <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fas fa-calendar-week"></i></div>
-                                </div>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                              </div>
+                              <input type="text" class="form-control float-right" id="classdatetime" name="class_date_time">
                             </div>
                         </div>
                       </div>
@@ -147,10 +147,14 @@ include('includes/footer.php');
     $('.select2').select2({
       theme: 'bootstrap4'
     });
-    $('#classdatetime').datetimepicker({
-      format: 'Y-m-d H:i'
-    });
-    
+    $('#classdatetime').daterangepicker({
+      timePicker: true,
+      singleDatePicker: true,
+      locale: {
+        format: 'DD/MM/YYYY hh:mm A'
+      }
+    })
+
   })
   function readURL(input) {
     if (input.files && input.files[0]) {

@@ -105,11 +105,11 @@ if(isset($_POST['submit'])){
                       <div class="form-group">
                       <div class="form-group">
                             <label for="classdatetime" class="col-form-label">Class Date & Time</label>
-                            <div class="input-group date" id="timepicker" data-target-input="nearest">
-                                <input type='text' class="form-control" id='datetimepicker4' value="<?php echo $result['date_time'] ?>" name="class_date_time"/>
-                                <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fas fa-calendar-week"></i></div>
-                                </div>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                              </div>
+                              <input type="text" class="form-control float-right" id="classdatetime" value="<?php echo $result['date_time'] ?>" name="class_date_time">
                             </div>
                         </div>
                       </div>
@@ -124,7 +124,7 @@ if(isset($_POST['submit'])){
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="class_img">Class Image</label>
-                          <input type="file" name="class_img" id="class_img" value="<?php echo $result['class_img'] ?>" class="form-control" >
+                          <input type="file" name="class_img" id="class_img" class="form-control" >
                           <img id="class-img" src="../uploads/class/<?php echo $result['class_img'] ?>" width="100%" height="200"/>
                         </div>
                     </div>
@@ -153,9 +153,13 @@ include('includes/footer.php');
     $('.select2').select2({
       theme: 'bootstrap4'
     });
-    $('#classdatetime').datetimepicker({
-      format: 'Y-m-d H:i'
-    });
+    $('#classdatetime').daterangepicker({
+      timePicker: true,
+      singleDatePicker: true,
+      locale: {
+        format: 'DD/MM/YYYY hh:mm A'
+      }
+    })
     
   })
   function readURL(input) {

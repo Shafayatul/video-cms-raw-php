@@ -124,10 +124,21 @@ if (isset($_POST['password-update'])) {
                 </select>
               </div>
             </div>
-            <div class="col-12 col-md-6 form-group">
-              <label for="birthday" class="label-control">Doğum Tarihi (Gün/Ay/Yıl)</label>
-              <input id="datepicker" width="100%" class="form-control" value="<?php echo $user['birthday']?>" name="birthday"/>
+            
+            <div class="col-sm-6">
+              <div class="form-group">
+              <div class="form-group">
+                    <label for="classdatetime" class="col-form-label">Doğum Tarihi (Gün/Ay/Yıl)</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                      </div>
+                      <input type="text" class="form-control float-right" id="birthday2" name="birthday" value="<?php echo $user['birthday']?>">
+                    </div>
+                </div>
+              </div>
             </div>
+
             <div class="col-12 col-md-6 form-group">
               <label for="" class="label-control">Ülke</label>
               <div class="select-styled">

@@ -50,7 +50,7 @@ $(document).ready(function() {
 
       birthday: {
         required: true,
-        dateISO: true
+        // dateISO: false
       },
 
       country: {

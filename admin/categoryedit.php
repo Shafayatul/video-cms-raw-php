@@ -78,7 +78,7 @@ if(isset($_POST['submit'])){
                     <div class="col-sm-6">
                         <div class="form-group">
                           <label for="category_img">Category Image</label>
-                          <input type="file" name="category_img" id="category_img" value="<?php echo $result['category_img']; ?>" class="form-control" placeholder="" aria-describedby="helpId" required>
+                          <input type="file" name="category_img" id="category_img" class="form-control" placeholder="" aria-describedby="helpId" >
                           <img id="blah" src="../uploads/category/<?php echo $result['category_img']; ?>" width="100%" height="200"/>
                           <!-- <small id="helpId" class="text-muted">ADD Category Image</small> -->
                         </div>
